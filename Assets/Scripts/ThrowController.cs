@@ -6,9 +6,7 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class ThrowController : MonoBehaviour
 {
-
-    [SerializeField] // todo assign with unity event
-    Rigidbody ballRb;
+    public delegate void ThrowContollerActions(Rigidbody ballRb);
 
     [SerializeField]
     float swipeLimitDistance;
@@ -20,16 +18,26 @@ public class ThrowController : MonoBehaviour
     [SerializeField]
     float throwForceInZ;
 
-    Vector2 startTouchPosition, endTouchPosition, swipeDirection; //touch start posisiton, end position and swipe direction
-    float touchTimeStart, touchTimeFinish, timeInterval; // To calculate the throw force on the Z axis.
+    private Rigidbody ballRb;
 
-    float forceX, forceY, forceZ;
+    private Vector2 startTouchPosition, endTouchPosition, swipeDirection; //touch start posisiton, end position and swipe direction
+    private float touchTimeStart, touchTimeFinish, timeInterval; // To calculate the throw force on the Z axis.
 
-    // Start is called before the first frame update
-    void Start()
+    private float forceX, forceY, forceZ;
+
+    private void OnEnable()
     {
-        // todo make with unity event
-        ballRb = GetComponent<Rigidbody>();
+        LevelController.ballCreateListener += OnBallCreateListener;
+    }
+
+    private void OnDisable()
+    {
+        LevelController.ballCreateListener -= OnBallCreateListener;
+    }
+
+    private void OnBallCreateListener(Rigidbody newBallRb)
+    {
+        ballRb = newBallRb;
     }
 
     // Update is called once per frame
@@ -140,15 +148,17 @@ public class ThrowController : MonoBehaviour
 
         if(ballRb != null) 
         { 
+            GameManager.Instance.IsThrowingBallExist = false;
+
             ballRb.isKinematic = false;
             ballRb.AddForce(forceX, forceY, forceZ);
-        }
 
-        ballRb = null;
-        
-        // todo add to ball pool
-        // Destroy ball in 3 second
-        Destroy(gameObject, 3f);
+            // todo add to ball pool
+            // Destroy ball in 3 second
+            Destroy(ballRb.gameObject, 3f);
+            
+            ballRb = null;
+        }
     }
 
     private float GetLimitSwipeDistance(bool isVerticle, float distance)
