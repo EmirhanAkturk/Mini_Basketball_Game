@@ -7,6 +7,8 @@ using UnityEngine;
 public class ThrowController : MonoBehaviour
 {
     public delegate void ThrowContollerActions(Rigidbody ballRb);
+    public static event LevelController.LevelControllerAcions ballThrowListener;
+
 
     [SerializeField]
     bool isMaxForce, isAutoThrow;
@@ -14,7 +16,7 @@ public class ThrowController : MonoBehaviour
     [Header("Throw Forces")]
     [SerializeField]
     float throwForceInX;
-    
+
     [SerializeField]
     float throwForceInY;
 
@@ -23,7 +25,10 @@ public class ThrowController : MonoBehaviour
 
     [SerializeField]
     float maxForceX, maxForceY, maxForceZ;
-    
+
+    [SerializeField]
+    float offsetForceY, offsetForceZ;
+
     [SerializeField]
     float minForceY, minForceZ;
 
@@ -55,77 +60,42 @@ public class ThrowController : MonoBehaviour
     {
         TounchControl();
     }
-    
-    
+
     private void TounchControl()
     {
-        #if UNITY_ANDROID
-            #region Android touch controller
-
-            // if screen was touched
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        // if screen was touched
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (ballRb != null)
             {
-                // Get touch start time and position information.
-                startTouchPosition = Input.GetTouch(0).position;
-                touchTimeStart = Time.time;
+                ballRb.isKinematic = true;
+                BallControler controller = ballRb.gameObject.GetComponent<BallControler>();
+                controller.IsThrowing = true;
             }
-            // if touching the screen is over
-            else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+            // Get touch start time and position information.
+            startTouchPosition = Input.mousePosition;
+            touchTimeStart = Time.time;
+        }
+        // if touching the screen is over
+        else if (Input.GetMouseButtonUp(0))
+        {
+            // Get touch end time and position information.
+            endTouchPosition = Input.mousePosition;
+            touchTimeFinish = Time.time;
+
+            // Calculate swipe time interval
+            timeInterval = touchTimeFinish - touchTimeStart;
+
+            // Calculate swipe direction
+            swipeDirection = startTouchPosition - endTouchPosition;
+
+            if (CheckSwipeDistance())
             {
-                // Get touch end time and position information.
-                endTouchPosition = Input.GetTouch(0).position;
-                touchTimeFinish = Time.time;
-
-                // Calculate swipe time interval
-                timeInterval = touchTimeFinish - touchTimeStart;
-
-                // Calculate swipe direction
-                swipeDirection = startTouchPosition - endTouchPosition;
-
-                if (CheckSwipeDistance())
-                {
-                    ThrowBall();
-                }
-            }
-
-            #endregion
-        #endif
-
-        #if UNITY_EDITOR
-            #region Unity editor touch controler
-
-            // if screen was touched
-            if (Input.GetMouseButtonDown(0))
-            {
-                if(ballRb != null)
-                    ballRb.isKinematic = true;    
-
-                // Get touch start time and position information.
-                startTouchPosition = Input.mousePosition;
-                touchTimeStart = Time.time;
-            }
-            // if touching the screen is over
-            else if (Input.GetMouseButtonUp(0))
-            {
-                // Get touch end time and position information.
-                endTouchPosition = Input.mousePosition;
-                touchTimeFinish = Time.time;
-
-                // Calculate swipe time interval
-                timeInterval = touchTimeFinish - touchTimeStart;
-
-                // Calculate swipe direction
-                swipeDirection = startTouchPosition - endTouchPosition;
-
-                if (CheckSwipeDistance())
-                {
-                    ThrowBall();
-                }
-
+                ThrowBall();
             }
 
-            #endregion
-        #endif
+        }
+
     }
 
     private bool CheckSwipeDistance()
@@ -175,6 +145,8 @@ public class ThrowController : MonoBehaviour
             Destroy(ballRb.gameObject, 5f);
 
             ballRb = null;
+
+            ballThrowListener?.Invoke();
         }
     }
 
@@ -211,8 +183,8 @@ public class ThrowController : MonoBehaviour
         forceZ = maxForceZ;
 
         ThrowBall();
-    }    
-    
+    }
+
     public void MinForceThrow()
     {
         forceY = minForceY;
