@@ -158,7 +158,7 @@ public class ThrowController : MonoBehaviour
         {
             forceX = Mathf.Clamp(-swipeDirection.x * throwForceInX, -maxForceX, maxForceX);
             forceY = Mathf.Clamp(-swipeDirection.y * throwForceInY, minForceY, maxForceY);
-            forceZ = Mathf.Clamp((3 * throwForceInZ) / (2 * timeInterval), minForceZ, maxForceZ);
+            forceZ = Mathf.Clamp(throwForceInZ /*(3 * throwForceInZ) / (2 * timeInterval)*/, minForceZ, maxForceZ);
         }
 
         Debug.Log(forceX + ", " + forceY + ", " + forceZ);
@@ -207,7 +207,6 @@ public class ThrowController : MonoBehaviour
 
     public void MaxForceThrow()
     {
-        forceX = maxForceX;
         forceY = maxForceY;
         forceZ = maxForceZ;
 
