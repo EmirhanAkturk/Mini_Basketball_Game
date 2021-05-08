@@ -849,13 +849,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.043619405, y: 0, z: 0, w: 0.9990483}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3.5, z: -5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -5, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1054191297
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,11 +889,10 @@ MonoBehaviour:
   isAutoThrow: 0
   throwForceInX: 1
   throwForceInY: 1.25
-  throwForceInZ: 50
+  throwForceInZ: 70
   maxForceX: 150
   maxForceY: 600
   maxForceZ: 500
-  minForceX: 0
   minForceY: 300
   minForceZ: 250
 --- !u!4 &1054191299
@@ -1097,7 +1096,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1371543430}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c6e852b4c09568347b3c37dadbde5085, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -1210,7 +1209,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 2708735295671784361, guid: 45922c85f8141e5468242dc50b5305c8, type: 3}
-  ballPosition: {x: 0, y: 2, z: 0}
 --- !u!114 &1644699182
 MonoBehaviour:
   m_ObjectHideFlags: 0

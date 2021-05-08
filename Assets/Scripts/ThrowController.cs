@@ -97,6 +97,9 @@ public class ThrowController : MonoBehaviour
             // if screen was touched
             if (Input.GetMouseButtonDown(0))
             {
+                if(ballRb != null)
+                    ballRb.isKinematic = true;    
+
                 // Get touch start time and position information.
                 startTouchPosition = Input.mousePosition;
                 touchTimeStart = Time.time;
@@ -153,12 +156,10 @@ public class ThrowController : MonoBehaviour
 
         if (!isAutoThrow)
         {
-            forceX = -swipeDirection.x * throwForceInX;
-            forceY = -swipeDirection.y * throwForceInY;
-            forceZ = (3 * throwForceInZ) /(2 * timeInterval);
+            forceX = Mathf.Clamp(-swipeDirection.x * throwForceInX, -maxForceX, maxForceX);
+            forceY = Mathf.Clamp(-swipeDirection.y * throwForceInY, minForceY, maxForceY);
+            forceZ = Mathf.Clamp((3 * throwForceInZ) / (2 * timeInterval), minForceZ, maxForceZ);
         }
-
-        CheckForceLimits();
 
         Debug.Log(forceX + ", " + forceY + ", " + forceZ);
 
@@ -171,39 +172,10 @@ public class ThrowController : MonoBehaviour
 
             // todo add to ball pool
             // Destroy ball in 3 second
-            Destroy(ballRb.gameObject, 3f);
+            Destroy(ballRb.gameObject, 5f);
 
             ballRb = null;
         }
-    }
-
-    private void CheckForceLimits()
-    {
-        CheckMaxLimits();
-        CheckMinLimits();
-    }
-
-    private void CheckMaxLimits()
-    {
-        if (forceX > maxForceX)
-            forceX = maxForceX;
-        else if (forceX < -maxForceX)
-            forceX = -maxForceX;
-
-        if (forceY > maxForceY)
-            forceY = maxForceY;
-
-        if (forceZ > maxForceZ)
-            forceZ = maxForceZ;
-    }    
-    
-    private void CheckMinLimits()
-    {
-        if (forceY < minForceY)
-            forceY = minForceY;
-
-        if (forceZ < minForceZ)
-            forceZ = minForceZ;
     }
 
     private float GetLimitSwipeDistance(bool isVerticle, float distance)
@@ -244,7 +216,6 @@ public class ThrowController : MonoBehaviour
     
     public void MinForceThrow()
     {
-        forceX = minForceX;
         forceY = minForceY;
         forceZ = minForceZ;
 

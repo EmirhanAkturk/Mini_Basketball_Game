@@ -11,9 +11,6 @@ public class LevelController : MonoBehaviour
     [SerializeField]
     GameObject ball;
 
-    [SerializeField]
-    Vector3 ballPosition;
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -34,10 +31,10 @@ public class LevelController : MonoBehaviour
             GameManager.Instance.IsThrowingBallExist = true;
 
             // todo get from the ball pool
-            GameObject newBall = Instantiate(ball, ballPosition, Quaternion.identity);
+            GameObject newBall = Instantiate(ball, ball.transform.position, Quaternion.identity);
 
             Rigidbody ballRb = newBall.GetComponent<Rigidbody>();
-            ballRb.isKinematic = true;
+            //ballRb.isKinematic = true;
 
             ballCreateListener?.Invoke(ballRb);
         }
