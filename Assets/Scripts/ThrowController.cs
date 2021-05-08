@@ -9,17 +9,27 @@ public class ThrowController : MonoBehaviour
     public delegate void ThrowContollerActions(Rigidbody ballRb);
 
     [SerializeField]
-    float swipeLimitDistance;
+    bool isMaxForce, isAutoThrow;
 
     [Header("Throw Forces")]
     [SerializeField]
-    float throwForceInXandY;
+    float throwForceInX;
+    
+    [SerializeField]
+    float throwForceInY;
 
     [SerializeField]
     float throwForceInZ;
 
+    [SerializeField]
+    float maxForceX, maxForceY, maxForceZ;
+    
+    [SerializeField]
+    float minForceY, minForceZ;
+
     private Rigidbody ballRb;
 
+    private float swipeLimitDistance = 50;
     private Vector2 startTouchPosition, endTouchPosition, swipeDirection; //touch start posisiton, end position and swipe direction
     private float touchTimeStart, touchTimeFinish, timeInterval; // To calculate the throw force on the Z axis.
 
@@ -41,11 +51,12 @@ public class ThrowController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         TounchControl();
     }
-
+    
+    
     private void TounchControl()
     {
         #if UNITY_ANDROID
@@ -140,14 +151,19 @@ public class ThrowController : MonoBehaviour
     {
         // add force to balls rigidbody in 3D space depending on swipe time, direction, throw forces
 
-        forceX = -swipeDirection.x * throwForceInXandY / 2;
-        forceY = -swipeDirection.y * throwForceInXandY;
-        forceZ = throwForceInZ / timeInterval;
+        if (!isAutoThrow)
+        {
+            forceX = -swipeDirection.x * throwForceInX;
+            forceY = -swipeDirection.y * throwForceInY;
+            forceZ = (3 * throwForceInZ) /(2 * timeInterval);
+        }
+
+        CheckForceLimits();
 
         Debug.Log(forceX + ", " + forceY + ", " + forceZ);
 
-        if(ballRb != null) 
-        { 
+        if (ballRb != null)
+        {
             GameManager.Instance.IsThrowingBallExist = false;
 
             ballRb.isKinematic = false;
@@ -156,9 +172,38 @@ public class ThrowController : MonoBehaviour
             // todo add to ball pool
             // Destroy ball in 3 second
             Destroy(ballRb.gameObject, 3f);
-            
+
             ballRb = null;
         }
+    }
+
+    private void CheckForceLimits()
+    {
+        CheckMaxLimits();
+        CheckMinLimits();
+    }
+
+    private void CheckMaxLimits()
+    {
+        if (forceX > maxForceX)
+            forceX = maxForceX;
+        else if (forceX < -maxForceX)
+            forceX = -maxForceX;
+
+        if (forceY > maxForceY)
+            forceY = maxForceY;
+
+        if (forceZ > maxForceZ)
+            forceZ = maxForceZ;
+    }    
+    
+    private void CheckMinLimits()
+    {
+        if (forceY < minForceY)
+            forceY = minForceY;
+
+        if (forceZ < minForceZ)
+            forceZ = minForceZ;
     }
 
     private float GetLimitSwipeDistance(bool isVerticle, float distance)
@@ -178,5 +223,31 @@ public class ThrowController : MonoBehaviour
             limitDistance = distance * referanceWidth / thisScreenWidth;
 
         return limitDistance;
+    }
+
+    public void AutoThrow()
+    {
+        if (isMaxForce)
+            MaxForceThrow();
+        else
+            MinForceThrow();
+    }
+
+    public void MaxForceThrow()
+    {
+        forceX = maxForceX;
+        forceY = maxForceY;
+        forceZ = maxForceZ;
+
+        ThrowBall();
+    }    
+    
+    public void MinForceThrow()
+    {
+        forceX = minForceX;
+        forceY = minForceY;
+        forceZ = minForceZ;
+
+        ThrowBall();
     }
 }

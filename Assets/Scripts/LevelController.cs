@@ -34,9 +34,9 @@ public class LevelController : MonoBehaviour
             GameManager.Instance.IsThrowingBallExist = true;
 
             // todo get from the ball pool
-            ball = Instantiate(ball, ballPosition, Quaternion.identity);
+            GameObject newBall = Instantiate(ball, ballPosition, Quaternion.identity);
 
-            Rigidbody ballRb = ball.GetComponent<Rigidbody>();
+            Rigidbody ballRb = newBall.GetComponent<Rigidbody>();
             ballRb.isKinematic = true;
 
             ballCreateListener?.Invoke(ballRb);
