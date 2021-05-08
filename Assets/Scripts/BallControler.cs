@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class BallControler : MonoBehaviour
 {
     // Start is called before the first frame update
