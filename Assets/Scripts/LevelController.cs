@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
+    // Unity Events
     public static event ThrowController.ThrowContollerActions ballCreateListener;
     public delegate void LevelControllerAcions();
-
 
     public static LevelController Instance;
 
     [SerializeField]
-    GameObject ball;
+    GameObject ballPrefab;
+
+    [Header("Scriptable Objects")]
+    [SerializeField]
+    Ball defaultBall;
 
     [SerializeField]
-    float spawnDelay;
+    Ball specialBall;
 
     private WaitForSeconds delay;
+    private float spawnDelay = 1;
 
     private void Awake()
     {
@@ -46,7 +51,7 @@ public class LevelController : MonoBehaviour
     {
         delay = new WaitForSeconds(spawnDelay);
         
-        StartCoroutine( SpawnBall( new WaitForSeconds(0) ) );
+        //StartCoroutine( SpawnBall( new WaitForSeconds(0) ) );
     }
 
     public IEnumerator SpawnBall(WaitForSeconds spawnDelay)
@@ -58,9 +63,12 @@ public class LevelController : MonoBehaviour
             GameManager.Instance.IsThrowingBallExist = true;
 
             // todo get from the ball pool
-            GameObject newBall = Instantiate(ball, ball.transform.position, ball.transform.rotation);
+            GameObject newBall = Instantiate(ballPrefab, ballPrefab.transform.position, ballPrefab.transform.rotation);
 
             Rigidbody ballRb = newBall.GetComponent<Rigidbody>();
+
+            BallController ballController = newBall.GetComponent<BallController>();
+            ballController.SetBallProperties(defaultBall); // todo control which ball
 
             ballCreateListener?.Invoke(ballRb);
         }

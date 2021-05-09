@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class BallControler : MonoBehaviour
+public class BallController : MonoBehaviour
 {
-
     private WaitForSeconds delay;
     private Rigidbody rb;
 
@@ -19,8 +18,19 @@ public class BallControler : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+
         delay = new WaitForSeconds(delayTime);
         StartCoroutine(EnableIsKinematic());
+    }
+
+    public void SetBallProperties(Ball ball)
+    {
+        if(rb == null)
+            rb = GetComponent<Rigidbody>();
+
+        rb.mass = ball.GetMass();
+        GetComponent<Renderer>().material.color = ball.GetColor();
+        transform.localScale = ball.GetSize();
     }
 
     private IEnumerator EnableIsKinematic()

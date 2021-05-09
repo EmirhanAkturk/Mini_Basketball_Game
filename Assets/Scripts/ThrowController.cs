@@ -6,6 +6,7 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class ThrowController : MonoBehaviour
 {
+    // Unity Events
     public delegate void ThrowContollerActions(Rigidbody ballRb);
     public static event LevelController.LevelControllerAcions ballThrowListener;
 
@@ -32,13 +33,11 @@ public class ThrowController : MonoBehaviour
     [SerializeField]
     float minForceY/*, minForceZ*/;
 
-    private Rigidbody ballRb;
+    [SerializeField]
+    Rigidbody ballRb;
 
     private float swipeLimitDistance = 50;
     private Vector2 startTouchPosition, endTouchPosition, swipeDirection; //touch start posisiton, end position and swipe direction
-    
-    // todo delete these   
-    private float touchTimeStart, touchTimeFinish, timeInterval; // To calculate the throw force on the Z axis.
 
     private float forceX, forceY, forceZ;
 
@@ -72,7 +71,7 @@ public class ThrowController : MonoBehaviour
             if (ballRb != null)
             {
                 ballRb.isKinematic = true;
-                BallControler controller = ballRb.gameObject.GetComponent<BallControler>();
+                BallController controller = ballRb.gameObject.GetComponent<BallController>();
                 controller.IsThrowing = true;
             }
             // Get touch start time and position information.
@@ -148,6 +147,10 @@ public class ThrowController : MonoBehaviour
             ballRb = null;
 
             ballThrowListener?.Invoke();
+        }
+        else
+        {
+            Debug.Log("ammar");
         }
     }
 
