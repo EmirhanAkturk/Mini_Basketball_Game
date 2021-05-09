@@ -7,9 +7,9 @@ using UnityEngine;
 public class ThrowController : MonoBehaviour
 {
     // Unity Events
-    public delegate void ThrowContollerActions(Rigidbody ballRb);
-    public static event LevelController.LevelControllerAcions ballThrowListener;
-
+    public delegate void ThrowContollerAction(Rigidbody ballRb);
+    public static event LevelController.CreateBallAction ballThrowListener1;
+    public static event GameplayUIController.RemainingBallAction ballThrowListener2;
 
     [SerializeField]
     bool isMaxForce, isAutoThrow;
@@ -25,13 +25,13 @@ public class ThrowController : MonoBehaviour
     float throwForceInZ;
 
     [SerializeField]
-    float maxForceX, maxForceY/*, maxForceZ*/;
+    float maxForceX, maxForceY;
 
     [SerializeField]
     float defaultForce;
 
     [SerializeField]
-    float minForceY/*, minForceZ*/;
+    float minForceY;
 
     [SerializeField]
     Rigidbody ballRb;
@@ -146,11 +146,8 @@ public class ThrowController : MonoBehaviour
 
             ballRb = null;
 
-            ballThrowListener?.Invoke();
-        }
-        else
-        {
-            Debug.Log("ammar");
+            ballThrowListener1?.Invoke();
+            ballThrowListener2?.Invoke();
         }
     }
 

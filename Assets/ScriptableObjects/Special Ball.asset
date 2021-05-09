@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9ef8f2a68cec44498ab24d524427c4, type: 3}
   m_Name: Special Ball
   m_EditorClassIdentifier: 
-  mass: 1.5
+  mass: 1.2
   color: {r: 0.254717, g: 0.24390353, b: 0.24390353, a: 0.6392157}
   size: {x: 1.1, y: 1.1, z: 1.1}

@@ -9,7 +9,7 @@ public class BallController : MonoBehaviour
     private WaitForSeconds delay;
     private Rigidbody rb;
 
-    private float delayTime = 1.7f;
+    private float delayTime = 1.3f;
     private bool isThrowing;
 
     public bool IsThrowing{ get => isThrowing; set => isThrowing = value; }

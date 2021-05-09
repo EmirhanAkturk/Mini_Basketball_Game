@@ -5,8 +5,8 @@ using UnityEngine;
 public class LevelController : MonoBehaviour
 {
     // Unity Events
-    public static event ThrowController.ThrowContollerActions ballCreateListener;
-    public delegate void LevelControllerAcions();
+    public static event ThrowController.ThrowContollerAction ballCreateListener;
+    public delegate void CreateBallAction();
 
     public static LevelController Instance;
 
@@ -22,6 +22,9 @@ public class LevelController : MonoBehaviour
 
     private WaitForSeconds delay;
     private float spawnDelay = 1;
+    private int ballsRemaining = 3;
+
+    public int BallsRemaining { get => ballsRemaining; set => ballsRemaining = value; }
 
     private void Awake()
     {
@@ -33,18 +36,29 @@ public class LevelController : MonoBehaviour
 
     private void OnEnable()
     {
-        ThrowController.ballThrowListener += OnBallThrowListener;
+        ThrowController.ballThrowListener1 += OnBallThrowListener;
     }
 
     private void OnDisable()
     {
-        ThrowController.ballThrowListener -= OnBallThrowListener;
+        ThrowController.ballThrowListener1 -= OnBallThrowListener;
     }
 
     private void OnBallThrowListener()
     {
-        // If the last created ball is thrown, create a new ball.
-        StartCoroutine(SpawnBall(delay));
+        --ballsRemaining;
+
+        if(ballsRemaining > 0) 
+        { 
+            // If the last created ball is thrown, create a new ball.
+            StartCoroutine(SpawnBall(delay));
+        }
+        else 
+        {
+            GameManager.Instance.IsPlaying = false;
+            // todo send event level is finish
+        }
+
     }
 
     private void Start()

@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 371651515586930661}
   - component: {fileID: 3996989502934932455}
   - component: {fileID: 7823652153915948711}
-  m_Layer: 0
-  m_Name: Defaul Ball 1
+  m_Layer: 8
+  m_Name: Defaul Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5771543930949794086}
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -0, y: 4, z: 0}
+  m_LocalPosition: {x: -0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -123,4 +123,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed7fe3f1e90e67543b2c125f0c52133b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 11400000, guid: 5a41ecdee80cf2d49953e877afd0e75f, type: 2}
