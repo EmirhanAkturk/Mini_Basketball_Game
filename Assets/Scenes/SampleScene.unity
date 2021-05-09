@@ -809,14 +809,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMaxForce: 0
   isAutoThrow: 0
-  throwForceInX: 1
-  throwForceInY: 1
-  throwForceInZ: 250
-  maxForceX: 150
-  maxForceY: 700
-  maxForceZ: 250
-  offsetForceY: 0
-  offsetForceZ: 0
+  throwForceInX: 0.25
+  throwForceInY: 0.5
+  throwForceInZ: 150
+  maxForceX: 100
+  maxForceY: 600
+  offsetForceY: 100
+  offsetForceZ: 100
   minForceY: 300
   minForceZ: 200
 --- !u!4 &1054191299
@@ -1146,7 +1145,7 @@ PrefabInstance:
     - target: {fileID: 730650100549804038, guid: 8c9487bd2bd03af48a7b66ee3c36bf5b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.97
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 730650100549804038, guid: 8c9487bd2bd03af48a7b66ee3c36bf5b,
         type: 3}

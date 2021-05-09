@@ -24,7 +24,7 @@ public class ThrowController : MonoBehaviour
     float throwForceInZ;
 
     [SerializeField]
-    float maxForceX, maxForceY, maxForceZ;
+    float maxForceX, maxForceY/*, maxForceZ*/;
 
     [SerializeField]
     float offsetForceY, offsetForceZ;
@@ -36,6 +36,8 @@ public class ThrowController : MonoBehaviour
 
     private float swipeLimitDistance = 50;
     private Vector2 startTouchPosition, endTouchPosition, swipeDirection; //touch start posisiton, end position and swipe direction
+    
+    // todo delete these   
     private float touchTimeStart, touchTimeFinish, timeInterval; // To calculate the throw force on the Z axis.
 
     private float forceX, forceY, forceZ;
@@ -74,20 +76,23 @@ public class ThrowController : MonoBehaviour
             }
             // Get touch start time and position information.
             startTouchPosition = Input.mousePosition;
-            touchTimeStart = Time.time;
+            //touchTimeStart = Time.time;
         }
         // if touching the screen is over
         else if (Input.GetMouseButtonUp(0))
         {
             // Get touch end time and position information.
             endTouchPosition = Input.mousePosition;
-            touchTimeFinish = Time.time;
+            //touchTimeFinish = Time.time;
 
             // Calculate swipe time interval
-            timeInterval = touchTimeFinish - touchTimeStart;
+            //timeInterval = touchTimeFinish - touchTimeStart;
 
             // Calculate swipe direction
             swipeDirection = startTouchPosition - endTouchPosition;
+
+            swipeDirection.x = GetProportionSwipeDistance(false, swipeDirection.x);
+            swipeDirection.y = GetProportionSwipeDistance(true, swipeDirection.y);
 
             if (CheckSwipeDistance())
             {
@@ -106,14 +111,14 @@ public class ThrowController : MonoBehaviour
         // horizontal swipe
         if (horizontalDistance > verticleDistance)
         {
-            if (horizontalDistance >= GetLimitSwipeDistance(false, swipeLimitDistance))
+            if (horizontalDistance >= GetProportionSwipeDistance(false, swipeLimitDistance))
                 return true;
             else
                 return false;
         }
         else
         {
-            if (verticleDistance >= GetLimitSwipeDistance(true, swipeLimitDistance))
+            if (verticleDistance >= GetProportionSwipeDistance(true, swipeLimitDistance))
                 return true;
             else
                 return false;
@@ -127,8 +132,8 @@ public class ThrowController : MonoBehaviour
         if (!isAutoThrow)
         {
             forceX = Mathf.Clamp(-swipeDirection.x * throwForceInX, -maxForceX, maxForceX);
-            forceY = Mathf.Clamp(-swipeDirection.y * throwForceInY, minForceY, maxForceY);
-            forceZ = Mathf.Clamp(throwForceInZ /*(3 * throwForceInZ) / (2 * timeInterval)*/, minForceZ, maxForceZ);
+            forceY = offsetForceY + Mathf.Clamp(-swipeDirection.y * throwForceInY, minForceY, maxForceY);
+            forceZ = offsetForceZ + throwForceInZ /*Mathf.Clamp(throwForceInZ, minForceZ, maxForceZ)*/;
         }
 
         Debug.Log(forceX + ", " + forceY + ", " + forceZ);
@@ -150,7 +155,7 @@ public class ThrowController : MonoBehaviour
         }
     }
 
-    private float GetLimitSwipeDistance(bool isVerticle, float distance)
+    private float GetProportionSwipeDistance(bool isVerticle, float distance)
     {
         float referanceWidth = 1080;
         float referanceHeight = 1920;
@@ -180,7 +185,7 @@ public class ThrowController : MonoBehaviour
     public void MaxForceThrow()
     {
         forceY = maxForceY;
-        forceZ = maxForceZ;
+        //forceZ = maxForceZ;
 
         ThrowBall();
     }
@@ -188,7 +193,7 @@ public class ThrowController : MonoBehaviour
     public void MinForceThrow()
     {
         forceY = minForceY;
-        forceZ = minForceZ;
+        //forceZ = minForceZ;
 
         ThrowBall();
     }
