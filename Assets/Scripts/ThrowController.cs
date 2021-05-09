@@ -27,10 +27,10 @@ public class ThrowController : MonoBehaviour
     float maxForceX, maxForceY/*, maxForceZ*/;
 
     [SerializeField]
-    float offsetForceY, offsetForceZ;
+    float defaultForce;
 
     [SerializeField]
-    float minForceY, minForceZ;
+    float minForceY/*, minForceZ*/;
 
     private Rigidbody ballRb;
 
@@ -132,8 +132,8 @@ public class ThrowController : MonoBehaviour
         if (!isAutoThrow)
         {
             forceX = Mathf.Clamp(-swipeDirection.x * throwForceInX, -maxForceX, maxForceX);
-            forceY = offsetForceY + Mathf.Clamp(-swipeDirection.y * throwForceInY, minForceY, maxForceY);
-            forceZ = offsetForceZ + throwForceInZ /*Mathf.Clamp(throwForceInZ, minForceZ, maxForceZ)*/;
+            forceY = defaultForce + Mathf.Clamp(-swipeDirection.y * throwForceInY, minForceY, maxForceY);
+            forceZ = defaultForce + throwForceInZ /*Mathf.Clamp(throwForceInZ, minForceZ, maxForceZ)*/;
         }
 
         Debug.Log(forceX + ", " + forceY + ", " + forceZ);

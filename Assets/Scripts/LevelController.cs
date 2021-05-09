@@ -58,7 +58,7 @@ public class LevelController : MonoBehaviour
             GameManager.Instance.IsThrowingBallExist = true;
 
             // todo get from the ball pool
-            GameObject newBall = Instantiate(ball, ball.transform.position, Quaternion.identity);
+            GameObject newBall = Instantiate(ball, ball.transform.position, ball.transform.rotation);
 
             Rigidbody ballRb = newBall.GetComponent<Rigidbody>();
 
