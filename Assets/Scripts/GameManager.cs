@@ -21,9 +21,14 @@ public class GameManager : MonoBehaviour
             Instance = this;
     }
 
-    public void Restart()
+    private void Start()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex);
+        Time.timeScale = 0;
+    }
+
+    public void StartGame()
+    {
+        Time.timeScale = 1;
+        isPlaying = true;
     }
 }

@@ -60,7 +60,8 @@ public class ThrowController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        TounchControl();
+        if(GameManager.Instance.IsPlaying)
+            TounchControl();
     }
 
     private void TounchControl()
@@ -76,17 +77,12 @@ public class ThrowController : MonoBehaviour
             }
             // Get touch start time and position information.
             startTouchPosition = Input.mousePosition;
-            //touchTimeStart = Time.time;
         }
-        // if touching the screen is over
-        else if (Input.GetMouseButtonUp(0))
+        // if touching the screen is over     //startTouchPosition condition is added for the moment the start button is pressed.
+        else if (Input.GetMouseButtonUp(0) && startTouchPosition != Vector2.zero)
         {
             // Get touch end time and position information.
             endTouchPosition = Input.mousePosition;
-            //touchTimeFinish = Time.time;
-
-            // Calculate swipe time interval
-            //timeInterval = touchTimeFinish - touchTimeStart;
 
             // Calculate swipe direction
             swipeDirection = startTouchPosition - endTouchPosition;
@@ -133,7 +129,7 @@ public class ThrowController : MonoBehaviour
         {
             forceX = Mathf.Clamp(-swipeDirection.x * throwForceInX, -maxForceX, maxForceX);
             forceY = defaultForce + Mathf.Clamp(-swipeDirection.y * throwForceInY, minForceY, maxForceY);
-            forceZ = defaultForce + throwForceInZ /*Mathf.Clamp(throwForceInZ, minForceZ, maxForceZ)*/;
+            forceZ = defaultForce + throwForceInZ;
         }
 
         Debug.Log(forceX + ", " + forceY + ", " + forceZ);
