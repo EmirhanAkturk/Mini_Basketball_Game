@@ -12,11 +12,13 @@ public class LevelController : MonoBehaviour
 
     public static LevelController Instance;
 
-    [SerializeField]
-    GameObject ballPrefab;
-
+    [Header("Basketball Hoop")]
     [SerializeField]
     GameObject basketballHoop;
+
+    [Header("Ball")]
+    [SerializeField]
+    GameObject ballPrefab;
 
     [SerializeField]
     Vector3 spanwnPosition;
@@ -31,8 +33,10 @@ public class LevelController : MonoBehaviour
     [SerializeField]
     Ball specialBall2;
 
+    // Dictionaries
     private Dictionary<int, int> ballNumbers;
     private Dictionary<int, float> basketballHoopPositions;
+    private Dictionary<int, int> scorePerBasket;
 
     private int levelNumber;
     private int ballsRemaining;
@@ -88,15 +92,22 @@ public class LevelController : MonoBehaviour
     {
         ballNumbers = new Dictionary<int, int>()
         {
-            { 1, 15 }, { 2, 10 }, { 3, 15 }, { 4, 10 }, { 5, 15 },
-            { 6, 10 }, { 7, 10 }, { 8, 10 }, { 9, 15 }, { 10, 10 }
+            { 1, 20 }, { 2, 15 }, { 3, 10 }, { 4, 15 }, { 5, 20 },
+            { 6, 15 }, { 7, 10 }, { 8, 15 }, { 9, 20}, { 10, 15}
+        };
+
+        scorePerBasket = new Dictionary<int, int>()
+        {
+            { 1, 1}, { 2, 2}, { 3, 3}, { 4, 2}, { 5, 1 },
+            { 6, 2}, { 7, 3}, { 8, 2 }, { 9, 2}, { 10, 3 }
         };
 
         basketballHoopPositions = new Dictionary<int, float>()
         {
             { 1, 7.5f }, { 2, 7.5f }, { 3, 10}, { 4, 10 }, { 5, 12.5f },
             { 6, 12.5f }, { 7, 15 }, { 8, 15 }, { 9, 17.5f }, { 10, 17.5f  }
-        };
+        };      
+
     }
 
     private void SetLevelStatus()
@@ -151,6 +162,10 @@ public class LevelController : MonoBehaviour
         return defaultBall;
     }
 
+    public int GetScorPerBasketValue()
+    {
+        return scorePerBasket[levelNumber];
+    }
 
     public int GetLevelNumber()
     {

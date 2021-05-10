@@ -17,7 +17,7 @@ public class GameplayUIController : MonoBehaviour
 
     private int ballsRemaining;
     private int score;
-    private int levelNumber;
+    private int scorePerBasket;
 
     private void OnEnable()
     {
@@ -33,7 +33,10 @@ public class GameplayUIController : MonoBehaviour
 
     private void OnBasketListener()
     {
-        IncreaseScore();
+        // increase score
+        score += scorePerBasket;
+
+        //update text
         scoreValueText.text = score.ToString();
     }
 
@@ -45,30 +48,19 @@ public class GameplayUIController : MonoBehaviour
         Debug.Log(ballsRemaining);
         if (ballsRemaining == 0)
         {
-            Debug.Log("***" + ballsRemaining);
-
             GameManager.Instance.Score = score;
+            //gameObject.SetActive(false);
         }
     }
 
     private void Start()
     {
-        levelNumber = LevelController.Instance.GetLevelNumber();
-
+        // Get level values
+        scorePerBasket = LevelController.Instance.GetScorPerBasketValue();
         ballsRemaining = LevelController.Instance.BallsRemaining;
+
+        // Initialize texts
         ballsRemainingValueText.text = ballsRemaining.ToString();
         scoreValueText.text = score.ToString();
     }
-
-
-    private void IncreaseScore()
-    {
-        if (levelNumber == 3)
-            score += 2;
-        else if (levelNumber == 7)
-            score += 3;
-        else
-            ++score;
-    }
-
 }

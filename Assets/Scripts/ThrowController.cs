@@ -147,8 +147,8 @@ public class ThrowController : MonoBehaviour
             ballRb.AddForce(forceX, forceY, forceZ);
 
             // todo add to ball pool
-            // Destroy ball in 4 second
-            Destroy(ballRb.gameObject, 4f);
+            // Destroy ball in 4.5 second
+            Destroy(ballRb.gameObject, 4.5f);
 
             ballRb = null;
 
