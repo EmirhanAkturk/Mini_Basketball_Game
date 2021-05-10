@@ -20,7 +20,7 @@ public class BallPooling : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (BallPooling.Instance != null && BallPooling.Instance != this)
             Destroy(gameObject);
         else
             Instance = this;
@@ -34,7 +34,7 @@ public class BallPooling : MonoBehaviour
     private void MemoryAllocate()
     {
         //allocate memory as many as the number of max trail cube.
-        balls = new List<GameObject>(3);
+        balls = new List<GameObject>(5);
     }
 
     private void GenerateBalls()
@@ -48,7 +48,7 @@ public class BallPooling : MonoBehaviour
             newBall = Instantiate(ballPrefab, spawnPosition, ballPrefab.transform.rotation);
             newBall.name = "newBall" + (i+1);
             newBall.SetActive(false);
-            newBall.transform.parent = ballsPoolParent;
+            newBall.transform.parent = transform;
 
             balls.Add(newBall);
         }
@@ -63,7 +63,7 @@ public class BallPooling : MonoBehaviour
             newBall = Instantiate(ballPrefab, spawnPosition, ballPrefab.transform.rotation);
             newBall.name = "newBall" + (balls.Count + 1);
             newBall.SetActive(true);
-            newBall.transform.parent = ballsPoolParent;
+            newBall.transform.parent = transform;
 
             balls.Insert(0, newBall);
         }

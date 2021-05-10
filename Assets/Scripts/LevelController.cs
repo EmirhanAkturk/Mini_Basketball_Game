@@ -92,7 +92,7 @@ public class LevelController : MonoBehaviour
     {
         ballNumbers = new Dictionary<int, int>()
         {
-            { 1, 20 }, { 2, 15 }, { 3, 10 }, { 4, 15 }, { 5, 20 },
+            { 1, 3/*20 todo uncomment*/ }, { 2, 15 }, { 3, 10 }, { 4, 15 }, { 5, 20 },
             { 6, 15 }, { 7, 10 }, { 8, 15 }, { 9, 20}, { 10, 15}
         };
 
