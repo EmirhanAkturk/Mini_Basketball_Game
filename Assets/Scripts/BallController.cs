@@ -20,9 +20,8 @@ public class BallController : MonoBehaviour, IPooledBall
         rb = GetComponent<Rigidbody>();
 
         //To prevent rotation while assigning velocity
-        rb.freezeRotation = true;
         rb.velocity = Vector3.zero;
-        rb.freezeRotation = false;
+        rb.angularVelocity = Vector3.zero;
 
         isThrowing = false;
         

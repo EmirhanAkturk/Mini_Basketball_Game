@@ -45,11 +45,9 @@ public class GameplayUIController : MonoBehaviour
         --ballsRemaining;
         ballsRemainingValueText.text = ballsRemaining.ToString();
 
-        Debug.Log(ballsRemaining);
         if (ballsRemaining == 0)
         {
             GameManager.Instance.Score = score;
-            //gameObject.SetActive(false);
         }
     }
 

@@ -23,9 +23,6 @@ public class ThrowController : MonoBehaviour
     [SerializeField]
     Rigidbody ballRb;
 
-    [SerializeField]
-    float torque;
-
     //It adds to the ejection force arising from the swiping.
     private Dictionary<int, int> defaultForces;
     
@@ -72,8 +69,8 @@ public class ThrowController : MonoBehaviour
         //It adds to the ejection force arising from the swiping.
         defaultForces = new Dictionary<int, int>()
         {
-            { 1, 10 }, { 2, 10 }, { 3, 75 }, { 4, 75  }, { 5, 125 },
-            { 6, 125 }, { 7, 210 }, { 8, 170 }, { 9, 210 }, { 10, 210 }
+            { 1, 0 }, { 2, 0 }, { 3, 90 }, { 4, 70  }, { 5, 110 },
+            { 6, 110 }, { 7, 225 }, { 8, 170 }, { 9, 210 }, { 10, 210 }
         };
     }
 
@@ -148,9 +145,9 @@ public class ThrowController : MonoBehaviour
             GameManager.Instance.IsThrowingBallExist = false;
 
             ballRb.isKinematic = false;
+
             ballRb.AddForce(forceX, forceY, forceZ);
-            Vector3 force = new Vector3(forceX, forceY, forceZ);
-            ballRb.AddTorque(Vector3.right * torque * forceY);
+            ballRb.AddTorque(Vector3.right * forceY);
 
 
             BallController ballController = ballRb.gameObject.GetComponent<BallController>();
