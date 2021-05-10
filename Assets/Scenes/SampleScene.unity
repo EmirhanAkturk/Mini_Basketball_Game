@@ -3098,6 +3098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultForce: 75
   ballRb: {fileID: 0}
+  torque: 100
 --- !u!4 &1054191299
 Transform:
   m_ObjectHideFlags: 0
@@ -3883,7 +3884,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 103.835464, y: 5, z: 84.60478}
+  m_Size: {x: 100, y: 10, z: 100}
   m_Center: {x: 9.254613, y: 0, z: -16.510817}
 --- !u!114 &1519698077
 MonoBehaviour:

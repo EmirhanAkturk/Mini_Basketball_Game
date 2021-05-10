@@ -6,7 +6,10 @@ public class BasketCheckher : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        BasketListener?.Invoke();
+        if(other.tag == "Ball")
+            BasketListener?.Invoke();
+        
+        other.gameObject.tag = "Untagged";
     }
 
 }

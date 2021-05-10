@@ -67,22 +67,27 @@ public class BallPooling : MonoBehaviour
 
             balls.Insert(0, newBall);
         }
-   
+
         GameObject usingBall = balls[0];
-        usingBall.SetActive(true);
 
         balls.RemoveAt(0);
         balls.Add(usingBall);
 
-        usingBall.transform.position = spawnPosition;
-        usingBall.transform.rotation = ballPrefab.transform.rotation;
+        SetDefaultValues(usingBall);
 
         IPooledBall pooledBall = usingBall.GetComponent<IPooledBall>();
 
-        if(pooledBall != null)
+        if (pooledBall != null)
             pooledBall.OnBallSpawn();
 
         return usingBall;
     }
 
+    private void SetDefaultValues(GameObject usingBall)
+    {
+        usingBall.SetActive(true);
+        usingBall.transform.position = spawnPosition;
+        usingBall.transform.rotation = ballPrefab.transform.rotation;
+        usingBall.tag = "Ball";
+    }
 }
