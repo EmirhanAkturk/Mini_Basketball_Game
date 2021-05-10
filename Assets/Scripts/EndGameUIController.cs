@@ -19,15 +19,12 @@ public class EndGameUIController : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("OnEnable");
         LevelController.EndGameListener += OnEndGameListener;
     }
 
     private void OnDisable()
     {
-        Debug.Log("OnDisaable");
         LevelController.EndGameListener -= OnEndGameListener;
-
     }
 
     private void OnEndGameListener()
@@ -40,17 +37,6 @@ public class EndGameUIController : MonoBehaviour
         showPanelDelay = new WaitForSeconds(3);
     }
 
-    public void ContinueButton()
-    {
-        //Increase the level number by one.
-        int currentLevel = PlayerPrefs.GetInt("LevelNumber");
-        ++currentLevel;
-        PlayerPrefs.SetInt("LevelNumber", currentLevel);
-
-        //Reload the level to create it according to the new level number
-        LoadScene();
-    }
-
     private IEnumerator ShowEndGamePanel()
     {
         yield return showPanelDelay;
@@ -58,7 +44,23 @@ public class EndGameUIController : MonoBehaviour
         scoreText.text = GameManager.Instance.Score.ToString();
 
         endGamePanel.SetActive(true);
+    }
 
+    public void ContinueButton()
+    {
+        IncreaseLevelNumber();
+
+        //Reload the level to create it according to the new level number
+        LoadScene();
+    }
+
+    private static void IncreaseLevelNumber()
+    {
+        //Increase the level number by one.
+        int currentLevel = LevelController.Instance.GetLevelNumber();
+
+        ++currentLevel;
+        PlayerPrefs.SetInt("LevelNumber", currentLevel);
     }
 
     private void LoadScene()
@@ -66,4 +68,5 @@ public class EndGameUIController : MonoBehaviour
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
     }
+
 }

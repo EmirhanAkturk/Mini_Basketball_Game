@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,16 +8,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-
-    [SerializeField]
-    int levelNumber;
-    
+    private int levelNumber;
     private bool isPlaying;
     private int score;
     private bool isThrowingBallExist;
 
-    public bool IsPlaying { get => isPlaying; set => isPlaying = value; }
     public int LevelNumber { get => levelNumber; set => levelNumber = value; }
+    public bool IsPlaying { get => isPlaying; set => isPlaying = value; }
     public int Score { get => score; set => score = value; }
     public bool IsThrowingBallExist { get => isThrowingBallExist; set => isThrowingBallExist = value; }
 
@@ -30,8 +28,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //PlayerPrefs.SetInt("LevelNumber", 1);
-        //PlayerPrefs.SetInt("LevelNumber", levelNumber);
         Time.timeScale = 0;
     }
 
@@ -40,4 +36,5 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         isPlaying = true;
     }
+
 }

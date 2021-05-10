@@ -11,12 +11,14 @@ public class ThrowController : MonoBehaviour
     public static event LevelController.CreateBallAction BallThrowListener1;
     public static event GameplayUIController.RemainingBallAction BallThrowListener2;
 
-    //[Header("Throw Forces")]
-    //[SerializeField]
     float throwForceInX = 0.25f, throwForceInY = 0.5f, throwForceInZ = 150; 
 
-    float maxForceX = 100, maxForceY = 650;
-    float defaultForce = 75, minForceY = 300;
+    float maxForceX = 100, maxForceY = 650, minForceY = 300;
+
+    [Header("Throw Forces")]
+    [SerializeField]
+    //It adds to the ejection force arising from the swiping.
+    float defaultForce = 75;
 
     [SerializeField]
     Rigidbody ballRb;
@@ -49,8 +51,8 @@ public class ThrowController : MonoBehaviour
     {
         InitializeDictionary();
 
-        //int levelNumber = PlayerPrefs.GetInt("LevelNumber");
-        int levelNumber = GameManager.Instance.LevelNumber;
+        int levelNumber = LevelController.Instance.GetLevelNumber();
+
         defaultForce = defaultForces[levelNumber];
     }
 
@@ -67,7 +69,7 @@ public class ThrowController : MonoBehaviour
         defaultForces = new Dictionary<int, int>()
         {
             { 1, 10 }, { 2, 10 }, { 3, 75 }, { 4, 75  }, { 5, 125 },
-            { 6, 125 }, { 7, 170 }, { 8, 170 }, { 9, 210 }, { 10, 210 }
+            { 6, 125 }, { 7, 210 }, { 8, 170 }, { 9, 210 }, { 10, 210 }
         };
     }
 
@@ -145,8 +147,8 @@ public class ThrowController : MonoBehaviour
             ballRb.AddForce(forceX, forceY, forceZ);
 
             // todo add to ball pool
-            // Destroy ball in 3 second
-            Destroy(ballRb.gameObject, 5f);
+            // Destroy ball in 4 second
+            Destroy(ballRb.gameObject, 4f);
 
             ballRb = null;
 

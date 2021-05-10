@@ -49,7 +49,6 @@ public class LevelController : MonoBehaviour
             Instance = this;
 
         InitializeDictionaries();
-
         SetLevelStatus();
     }
 
@@ -76,22 +75,13 @@ public class LevelController : MonoBehaviour
         {
             EndGameListener?.Invoke(); // not working !!
             GameManager.Instance.IsPlaying = false;
-            Debug.Log("Ball remaining = 0");
         }
     }
 
     private void Start()
     {
-        //reset score at the beginning of the level
-        GameManager.Instance.Score = 0;
-
         delay = new WaitForSeconds(spawnDelay);
-
         StartCoroutine(SpawnBall(new WaitForSeconds(0)));
-
-
-        //levelNumber = PlayerPrefs.GetInt("LevelNumber");
-
     }
 
     private void InitializeDictionaries()
@@ -99,7 +89,7 @@ public class LevelController : MonoBehaviour
         ballNumbers = new Dictionary<int, int>()
         {
             { 1, 15 }, { 2, 10 }, { 3, 15 }, { 4, 10 }, { 5, 15 },
-            { 6, 10 }, { 7, 3 /* 15 todo uncomment */ }, { 8, 10 }, { 9, 15 }, { 10, 10 }
+            { 6, 10 }, { 7, 10 }, { 8, 10 }, { 9, 15 }, { 10, 10 }
         };
 
         basketballHoopPositions = new Dictionary<int, float>()
@@ -111,7 +101,7 @@ public class LevelController : MonoBehaviour
 
     private void SetLevelStatus()
     {
-        levelNumber = 7/*GameManager.Instance.LevelNumber*/;
+        levelNumber = GetLevelNumber();
 
         Debug.Log(levelNumber);
 
@@ -160,4 +150,19 @@ public class LevelController : MonoBehaviour
 
         return defaultBall;
     }
+
+
+    public int GetLevelNumber()
+    {
+        int currentlevel = PlayerPrefs.GetInt("LevelNumber");
+
+        if (currentlevel == 0 || currentlevel > 10)
+        {
+            currentlevel = 1;
+            PlayerPrefs.SetInt("LevelNumber", currentlevel);
+        }
+
+        return currentlevel;
+    }
+
 }
