@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,16 +14,26 @@ public class LevelController : MonoBehaviour
     [SerializeField]
     GameObject ballPrefab;
 
+    [SerializeField]
+    GameObject basketballHoop;
+
     [Header("Scriptable Objects")]
     [SerializeField]
     Ball defaultBall;
 
     [SerializeField]
-    Ball specialBall;
+    Ball specialBall1;
+    
+    [SerializeField]
+    Ball specialBall2;
 
+    private Dictionary<int, int> ballNumbers;
+    private Dictionary<int, float> basketballHoopPositions;
+
+    private int levelNumber;
+    private int ballsRemaining;
     private WaitForSeconds delay;
     private float spawnDelay = 1;
-    private int ballsRemaining = 3;
 
     public int BallsRemaining { get => ballsRemaining; set => ballsRemaining = value; }
 
@@ -63,9 +74,43 @@ public class LevelController : MonoBehaviour
 
     private void Start()
     {
+        //reset score at the beginning of the level
+        GameManager.Instance.Score = 0;
+
         delay = new WaitForSeconds(spawnDelay);
-        
-        //StartCoroutine( SpawnBall( new WaitForSeconds(0) ) );
+
+        InitializeDictionaries();
+
+        //levelNumber = PlayerPrefs.GetInt("LevelNumber");
+        levelNumber = GameManager.Instance.LevelNumber;
+
+        Debug.Log(levelNumber);
+
+        ballsRemaining = ballNumbers[levelNumber];
+        float zPosition = basketballHoopPositions[levelNumber];
+
+        SetHoopPosition(zPosition);
+    }
+
+    private void InitializeDictionaries()
+    {
+        ballNumbers = new Dictionary<int, int>()
+        {
+            { 1, 15 }, { 2, 10 }, { 3, 15 }, { 4, 10 }, { 5, 15 },
+            { 6, 10 }, { 7, 15 }, { 8, 10 }, { 9, 15 }, { 10, 10 }
+        };
+
+        basketballHoopPositions = new Dictionary<int, float>()
+        {
+            { 1, 7.5f }, { 2, 7.5f }, { 3, 10}, { 4, 10 }, { 5, 12.5f },
+            { 6, 12.5f }, { 7, 15 }, { 8, 15 }, { 9, 17.5f }, { 10, 17.5f  }
+        };
+    }
+
+    private void SetHoopPosition(float zPos)
+    {
+        Vector3 currentPos = basketballHoop.transform.position;
+        basketballHoop.transform.position = new Vector3(currentPos.x, currentPos.y, zPos);
     }
 
     public IEnumerator SpawnBall(WaitForSeconds spawnDelay)
@@ -82,9 +127,22 @@ public class LevelController : MonoBehaviour
             Rigidbody ballRb = newBall.GetComponent<Rigidbody>();
 
             BallController ballController = newBall.GetComponent<BallController>();
-            ballController.SetBallProperties(defaultBall); // todo control which ball
+
+            Ball ball = GetBall();
+            ballController.SetBallProperties(ball);
 
             ballCreateListener?.Invoke(ballRb);
         }
+    }
+
+    private Ball GetBall()
+    {
+        if (levelNumber == 3)
+            return specialBall1;
+
+        if (levelNumber == 7)
+            return specialBall2;
+
+        return defaultBall;
     }
 }

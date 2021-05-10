@@ -7,10 +7,16 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [SerializeField]
+    int levelNumber;
+    
     private bool isPlaying;
+    private int score;
     private bool isThrowingBallExist;
 
     public bool IsPlaying { get => isPlaying; set => isPlaying = value; }
+    public int LevelNumber { get => levelNumber; set => levelNumber = value; }
+    public int Score { get => score; set => score = value; }
     public bool IsThrowingBallExist { get => isThrowingBallExist; set => isThrowingBallExist = value; }
 
     private void Awake()
@@ -23,6 +29,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        //PlayerPrefs.SetInt("LevelNumber", 1);
+        //PlayerPrefs.SetInt("LevelNumber", levelNumber);
         Time.timeScale = 0;
     }
 

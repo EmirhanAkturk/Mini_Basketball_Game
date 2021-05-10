@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e9ef8f2a68cec44498ab24d524427c4, type: 3}
+  m_Name: Special Ball 2
+  m_EditorClassIdentifier: 
+  mass: 1.1
+  color: {r: 0.9528302, g: 0.12832399, b: 0.1033731, a: 0.6392157}
+  size: {x: 1.25, y: 1.25, z: 1.25}

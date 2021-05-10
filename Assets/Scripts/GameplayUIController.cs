@@ -24,13 +24,11 @@ public class GameplayUIController : MonoBehaviour
         BasketCheckher.basketListener += OnBasketListiner;
     }
 
-
     private void OnDisable()
     {
         ThrowController.ballThrowListener1 -= OnBallThrowListener;
         BasketCheckher.basketListener -= OnBasketListiner;
     }
-
 
     private void OnBasketListiner()
     {
@@ -42,6 +40,9 @@ public class GameplayUIController : MonoBehaviour
     {
         --ballsRemaining;
         ballsRemainingValueText.text = ballsRemaining.ToString();
+
+        if (ballsRemaining == 0)
+            GameManager.Instance.Score = score;
     }
 
     private void Start()

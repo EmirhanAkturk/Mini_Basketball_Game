@@ -11,34 +11,21 @@ public class ThrowController : MonoBehaviour
     public static event LevelController.CreateBallAction ballThrowListener1;
     public static event GameplayUIController.RemainingBallAction ballThrowListener2;
 
-    [SerializeField]
-    bool isMaxForce, isAutoThrow;
+    //[Header("Throw Forces")]
+    //[SerializeField]
+    float throwForceInX = 0.25f, throwForceInY = 0.5f, throwForceInZ = 150; 
 
-    [Header("Throw Forces")]
-    [SerializeField]
-    float throwForceInX;
-
-    [SerializeField]
-    float throwForceInY;
-
-    [SerializeField]
-    float throwForceInZ;
-
-    [SerializeField]
-    float maxForceX, maxForceY;
-
-    [SerializeField]
-    float defaultForce;
-
-    [SerializeField]
-    float minForceY;
+    float maxForceX = 100, maxForceY = 650;
+    float defaultForce = 75, minForceY = 300;
 
     [SerializeField]
     Rigidbody ballRb;
 
-    private float swipeLimitDistance = 50;
-    private Vector2 startTouchPosition, endTouchPosition, swipeDirection; //touch start posisiton, end position and swipe direction
+    private Dictionary<int, int> defaultForces;
+    //touch start posisiton, end position and swipe direction
+    private Vector2 startTouchPosition, endTouchPosition, swipeDirection; 
 
+    private float swipeLimitDistance = 50;
     private float forceX, forceY, forceZ;
 
     private void OnEnable()
@@ -56,11 +43,29 @@ public class ThrowController : MonoBehaviour
         ballRb = newBallRb;
     }
 
+    private void Start()
+    {
+        InitializeDictionary();
+
+        //int levelNumber = PlayerPrefs.GetInt("LevelNumber");
+        int levelNumber = GameManager.Instance.LevelNumber;
+        defaultForce = defaultForces[levelNumber];
+    }
+
     // Update is called once per frame
     private void Update()
     {
         if(GameManager.Instance.IsPlaying)
             TounchControl();
+    }
+
+    private void InitializeDictionary()
+    {
+        defaultForces = new Dictionary<int, int>()
+        {
+            { 1, 10 }, { 2, 10 }, { 3, 75 }, { 4, 75  }, { 5, 125 },
+            { 6, 125 }, { 7, 170 }, { 8, 170 }, { 9, 210 }, { 10, 210 }
+        };
     }
 
     private void TounchControl()
@@ -93,7 +98,6 @@ public class ThrowController : MonoBehaviour
             {
                 ThrowBall();
             }
-
         }
 
     }
@@ -124,12 +128,9 @@ public class ThrowController : MonoBehaviour
     {
         // add force to balls rigidbody in 3D space depending on swipe time, direction, throw forces
 
-        if (!isAutoThrow)
-        {
-            forceX = Mathf.Clamp(-swipeDirection.x * throwForceInX, -maxForceX, maxForceX);
-            forceY = defaultForce + Mathf.Clamp(-swipeDirection.y * throwForceInY, minForceY, maxForceY);
-            forceZ = defaultForce + throwForceInZ;
-        }
+        forceX = Mathf.Clamp(-swipeDirection.x * throwForceInX, -maxForceX, maxForceX);
+        forceY = defaultForce + Mathf.Clamp(-swipeDirection.y * throwForceInY, minForceY, maxForceY);
+        forceZ = defaultForce + throwForceInZ;
 
         Debug.Log(forceX + ", " + forceY + ", " + forceZ);
 
@@ -168,29 +169,5 @@ public class ThrowController : MonoBehaviour
             limitDistance = distance * referanceWidth / thisScreenWidth;
 
         return limitDistance;
-    }
-
-    public void AutoThrow()
-    {
-        if (isMaxForce)
-            MaxForceThrow();
-        else
-            MinForceThrow();
-    }
-
-    public void MaxForceThrow()
-    {
-        forceY = maxForceY;
-        //forceZ = maxForceZ;
-
-        ThrowBall();
-    }
-
-    public void MinForceThrow()
-    {
-        forceY = minForceY;
-        //forceZ = minForceZ;
-
-        ThrowBall();
     }
 }
