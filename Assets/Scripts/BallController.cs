@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class BallController : MonoBehaviour
+public class BallController : MonoBehaviour, IPooledBall
 {
-    private WaitForSeconds delay;
+    private WaitForSeconds enableIsKinematicDelay;
     private Rigidbody rb;
 
     private float delayTime = 1.3f;
@@ -15,11 +15,17 @@ public class BallController : MonoBehaviour
     public bool IsThrowing{ get => isThrowing; set => isThrowing = value; }
 
     // Start is called before the first frame update
-    private void Start()
+    public void OnBallSpawn(Vector3 position, Quaternion rotation)
     {
-        rb = GetComponent<Rigidbody>();
+        //transform.position = position;
+        //transform.rotation = rotation;
 
-        delay = new WaitForSeconds(delayTime);
+        rb = GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
+
+        isThrowing = false;
+        
+        enableIsKinematicDelay = new WaitForSeconds(delayTime);
         StartCoroutine(EnableIsKinematic());
     }
 
@@ -33,12 +39,33 @@ public class BallController : MonoBehaviour
         transform.localScale = ball.GetSize();
     }
 
+    public void AddBackToPool(float hideDelayTime)
+    {
+        WaitForSeconds hideDelay = new WaitForSeconds(hideDelayTime);
+
+        StartCoroutine(HideGameObject(hideDelay));
+    }
+
     private IEnumerator EnableIsKinematic()
     {
-        yield return delay;
+        yield return enableIsKinematicDelay;
 
         if (!isThrowing && !rb.isKinematic)
             rb.isKinematic = true;
+    }
+
+
+    public IEnumerator HideGameObject(WaitForSeconds hideDelay)
+    {
+        yield return hideDelay;
+
+        //rb.velocity = Vector3.zero;
+
+        //gameObject.transform.position = startPosition;
+        //gameObject.transform.rotation = startRotation;
+
+        gameObject.SetActive(false);
+
     }
 
 }

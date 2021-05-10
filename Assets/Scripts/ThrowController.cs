@@ -31,6 +31,7 @@ public class ThrowController : MonoBehaviour
 
     private float swipeLimitDistance = 50;
     private float forceX, forceY, forceZ;
+    private float delayTime = 4;
 
     private void OnEnable()
     {
@@ -146,15 +147,25 @@ public class ThrowController : MonoBehaviour
             ballRb.isKinematic = false;
             ballRb.AddForce(forceX, forceY, forceZ);
 
-            // todo add to ball pool
-            // Destroy ball in 4.5 second
-            Destroy(ballRb.gameObject, 4.5f);
+            // Hide ball in 4.5 second
+            //StartCoroutine( HideBall(ballRb.gameObject, new WaitForSeconds(hideDelayTime)) );
+
+            BallController ballController = ballRb.gameObject.GetComponent<BallController>();
+
+            ballController.AddBackToPool(delayTime);
 
             ballRb = null;
 
             BallThrowListener1?.Invoke();
             BallThrowListener2?.Invoke();
         }
+    }
+
+    public IEnumerator HideBall(GameObject ball, WaitForSeconds hideDelay)
+    {
+        yield return hideDelay;
+
+        ball.SetActive(false);
     }
 
     private float GetProportionSwipeDistance(bool isVerticle, float distance)

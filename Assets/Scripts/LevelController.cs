@@ -138,20 +138,22 @@ public class LevelController : MonoBehaviour
             GameManager.Instance.IsThrowingBallExist = true;
 
             // todo get from the ball pool
-            GameObject newBall = Instantiate(ballPrefab, spanwnPosition, ballPrefab.transform.rotation);
+            GameObject newBall = BallPooling.Instance.GetNewBall();
+
+                /*Instantiate(ballPrefab, spanwnPosition, ballPrefab.transform.rotation);*/
 
             Rigidbody ballRb = newBall.GetComponent<Rigidbody>();
 
             BallController ballController = newBall.GetComponent<BallController>();
 
-            Ball ball = GetBall();
+            Ball ball = GetBallProperties();
             ballController.SetBallProperties(ball);
 
             BallCreateListener?.Invoke(ballRb);
         }
     }
 
-    private Ball GetBall()
+    private Ball GetBallProperties()
     {
         if (levelNumber == 3)
             return specialBall1;

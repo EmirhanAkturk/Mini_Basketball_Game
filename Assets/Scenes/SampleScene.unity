@@ -278,7 +278,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 72053990}
   m_LocalRotation: {x: -0, y: -0.30001915, z: -0, w: 0.95393324}
-  m_LocalPosition: {x: -39.6, y: 35.30002, z: 51.1}
+  m_LocalPosition: {x: -39.6, y: 16.000042, z: 51.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1621346135}
@@ -295,7 +295,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 100.001144, y: 10, z: 10}
+  m_Size: {x: 100.001144, y: 60, z: 10}
   m_Center: {x: 0, y: 0, z: 22.723995}
 --- !u!1 &85831645
 GameObject:
@@ -1287,7 +1287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 366118267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 35.3, z: 88.2}
+  m_LocalPosition: {x: 0, y: 16.000023, z: 88.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1621346135}
@@ -1304,7 +1304,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 100.001144, y: 10, z: 44.683464}
+  m_Size: {x: 100.001144, y: 60, z: 44.683464}
   m_Center: {x: 0, y: 0, z: 22.723995}
 --- !u!1 &382858223
 GameObject:
@@ -1367,7 +1367,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endGamePanel: {fileID: 515949847}
   scoreText: {fileID: 221369211}
-  levelValueText: {fileID: 0}
 --- !u!114 &382858227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1912,6 +1911,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515949847}
   m_CullTransparentMesh: 0
+--- !u!1 &550096615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 550096616}
+  m_Layer: 0
+  m_Name: Ball Pool Parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &550096616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550096615}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.1881971, y: 5.663787, z: 4.0697155}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &635599339
 GameObject:
   m_ObjectHideFlags: 0
@@ -1937,7 +1966,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635599339}
   m_LocalRotation: {x: -0, y: -0.7026064, z: -0, w: 0.71157885}
-  m_LocalPosition: {x: -76.311745, y: 35.30002, z: -5.173565}
+  m_LocalPosition: {x: -76.311745, y: 16.000042, z: -5.173565}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1621346135}
@@ -1954,7 +1983,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 100.001144, y: 10, z: 10}
+  m_Size: {x: 100.001144, y: 60, z: 10}
   m_Center: {x: 0, y: 0, z: 22.723995}
 --- !u!1 &637689551
 GameObject:
@@ -2514,7 +2543,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 757834762}
   m_LocalRotation: {x: -0, y: 0.74851656, z: -0, w: 0.66311616}
-  m_LocalPosition: {x: 77.8, y: 35.30002, z: -24.5}
+  m_LocalPosition: {x: 77.8, y: 16.000042, z: -24.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1621346135}
@@ -2531,7 +2560,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 100.001144, y: 10, z: 10}
+  m_Size: {x: 100.001144, y: 60, z: 10}
   m_Center: {x: 0, y: 0, z: 22.723995}
 --- !u!1 &767497030
 GameObject:
@@ -3108,7 +3137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1138841908}
   m_LocalRotation: {x: -0, y: 0.42460337, z: -0, w: 0.9053795}
-  m_LocalPosition: {x: 60.2, y: 35.30002, z: 39.1}
+  m_LocalPosition: {x: 60.2, y: 16.000042, z: 39.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1621346135}
@@ -3125,7 +3154,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 100.001144, y: 10, z: 10}
+  m_Size: {x: 100.001144, y: 60, z: 10}
   m_Center: {x: 0, y: 0, z: 22.723995}
 --- !u!64 &1188289995
 MeshCollider:
@@ -3893,7 +3922,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1584045777}
   m_LocalRotation: {x: -0, y: -0.92700744, z: -0, w: 0.375043}
-  m_LocalPosition: {x: -51.952225, y: 35.30002, z: -66.50088}
+  m_LocalPosition: {x: -51.952225, y: 16.000042, z: -66.50088}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1621346135}
@@ -3910,7 +3939,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 100.001144, y: 10, z: 10}
+  m_Size: {x: 100.001144, y: 60, z: 10}
   m_Center: {x: 0, y: 0, z: 22.723995}
 --- !u!1 &1620911130
 GameObject:
@@ -4071,9 +4100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36fd0ef25f6dc1c46a1aa5b670bad1f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  basketballHoop: {fileID: 1514806412475843447}
   ballPrefab: {fileID: 5771543930949794086, guid: c867ad7c142a0364a8b8bc1baa9acd28,
     type: 3}
-  basketballHoop: {fileID: 1514806412475843447}
   spanwnPosition: {x: 0, y: 3, z: 0}
   defaultBall: {fileID: 11400000, guid: 5a41ecdee80cf2d49953e877afd0e75f, type: 2}
   specialBall1: {fileID: 11400000, guid: 8710450ecefce3b4f932beea5dfd1455, type: 2}
@@ -4188,6 +4217,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 778366344}
   m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1786918814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1786918816}
+  - component: {fileID: 1786918815}
+  m_Layer: 0
+  m_Name: Ball Pooling
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1786918815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786918814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a58e271030a3ef94aa2239ca6a831548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballPrefab: {fileID: 5771543930949794086, guid: c867ad7c142a0364a8b8bc1baa9acd28,
+    type: 3}
+  ballsPoolParent: {fileID: 550096616}
+  spawnPosition: {x: 0, y: 3, z: 0}
+--- !u!4 &1786918816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786918814}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.1881971, y: 5.663787, z: 4.0697155}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1825376501
 GameObject:
@@ -4344,7 +4420,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872669431}
   m_LocalRotation: {x: -0, y: 0.9687554, z: -0, w: 0.24801801}
-  m_LocalPosition: {x: 35.22675, y: 35.30002, z: -76.48456}
+  m_LocalPosition: {x: 35.22675, y: 16.000042, z: -76.48456}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1621346135}
@@ -4361,7 +4437,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 100.001144, y: 10, z: 10}
+  m_Size: {x: 100.001144, y: 60, z: 10}
   m_Center: {x: 0, y: 0, z: 22.723995}
 --- !u!1 &1874244301
 GameObject:
@@ -4861,7 +4937,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2074474408}
   m_LocalRotation: {x: -0, y: -0.99724424, z: -0, w: 0.07418889}
-  m_LocalPosition: {x: -8, y: 35.30002, z: -90.1}
+  m_LocalPosition: {x: -8, y: 16, z: -90.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1621346135}
@@ -4878,7 +4954,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 50, y: 10, z: 10}
+  m_Size: {x: 50, y: 60, z: 10}
   m_Center: {x: 0, y: 0, z: 22.723995}
 --- !u!1 &2124823781
 GameObject:
