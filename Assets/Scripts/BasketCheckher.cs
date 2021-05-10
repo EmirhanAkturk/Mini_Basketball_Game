@@ -2,11 +2,11 @@
 
 public class BasketCheckher : MonoBehaviour
 {
-    public static event GameplayUIController.BasketAction basketListener;
+    public static event GameplayUIController.BasketAction BasketListener;
 
     private void OnTriggerEnter(Collider other)
     {
-        basketListener?.Invoke();
+        BasketListener?.Invoke();
     }
 
 }

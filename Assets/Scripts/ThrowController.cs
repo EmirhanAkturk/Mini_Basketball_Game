@@ -8,8 +8,8 @@ public class ThrowController : MonoBehaviour
 {
     // Unity Events
     public delegate void ThrowContollerAction(Rigidbody ballRb);
-    public static event LevelController.CreateBallAction ballThrowListener1;
-    public static event GameplayUIController.RemainingBallAction ballThrowListener2;
+    public static event LevelController.CreateBallAction BallThrowListener1;
+    public static event GameplayUIController.RemainingBallAction BallThrowListener2;
 
     //[Header("Throw Forces")]
     //[SerializeField]
@@ -30,12 +30,12 @@ public class ThrowController : MonoBehaviour
 
     private void OnEnable()
     {
-        LevelController.ballCreateListener += OnBallCreateListener;
+        LevelController.BallCreateListener += OnBallCreateListener;
     }
 
     private void OnDisable()
     {
-        LevelController.ballCreateListener -= OnBallCreateListener;
+        LevelController.BallCreateListener -= OnBallCreateListener;
     }
 
     private void OnBallCreateListener(Rigidbody newBallRb)
@@ -132,7 +132,7 @@ public class ThrowController : MonoBehaviour
         forceY = defaultForce + Mathf.Clamp(-swipeDirection.y * throwForceInY, minForceY, maxForceY);
         forceZ = defaultForce + throwForceInZ;
 
-        Debug.Log(forceX + ", " + forceY + ", " + forceZ);
+        //Debug.Log(forceX + ", " + forceY + ", " + forceZ);
 
         if (ballRb != null)
         {
@@ -147,8 +147,8 @@ public class ThrowController : MonoBehaviour
 
             ballRb = null;
 
-            ballThrowListener1?.Invoke();
-            ballThrowListener2?.Invoke();
+            BallThrowListener1?.Invoke();
+            BallThrowListener2?.Invoke();
         }
     }
 

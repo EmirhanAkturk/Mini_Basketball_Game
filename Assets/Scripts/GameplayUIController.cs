@@ -20,17 +20,17 @@ public class GameplayUIController : MonoBehaviour
 
     private void OnEnable()
     {
-        ThrowController.ballThrowListener1 += OnBallThrowListener;
-        BasketCheckher.basketListener += OnBasketListiner;
+        ThrowController.BallThrowListener1 += OnBallThrowListener;
+        BasketCheckher.BasketListener += OnBasketListener;
     }
 
     private void OnDisable()
     {
-        ThrowController.ballThrowListener1 -= OnBallThrowListener;
-        BasketCheckher.basketListener -= OnBasketListiner;
+        ThrowController.BallThrowListener1 -= OnBallThrowListener;
+        BasketCheckher.BasketListener -= OnBasketListener;
     }
 
-    private void OnBasketListiner()
+    private void OnBasketListener()
     {
         ++score;
         scoreValueText.text = score.ToString();

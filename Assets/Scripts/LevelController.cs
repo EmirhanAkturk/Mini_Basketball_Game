@@ -6,8 +6,9 @@ using UnityEngine;
 public class LevelController : MonoBehaviour
 {
     // Unity Events
-    public static event ThrowController.ThrowContollerAction ballCreateListener;
     public delegate void CreateBallAction();
+    public static event ThrowController.ThrowContollerAction BallCreateListener;
+    public static event EndGameUIController.EndGameAction EndGameListener;
 
     public static LevelController Instance;
 
@@ -47,27 +48,29 @@ public class LevelController : MonoBehaviour
 
     private void OnEnable()
     {
-        ThrowController.ballThrowListener1 += OnBallThrowListener;
+        ThrowController.BallThrowListener1 += OnBallThrowListener;
     }
 
     private void OnDisable()
     {
-        ThrowController.ballThrowListener1 -= OnBallThrowListener;
+        ThrowController.BallThrowListener1 -= OnBallThrowListener;
     }
 
     private void OnBallThrowListener()
     {
         --ballsRemaining;
 
-        if(ballsRemaining > 0) 
+        if(ballsRemaining > 0)
         { 
             // If the last created ball is thrown, create a new ball.
             StartCoroutine(SpawnBall(delay));
         }
         else 
         {
+            EndGameListener?.Invoke(); // not working !!
             GameManager.Instance.IsPlaying = false;
-            // todo send event level is finish
+            Debug.Log("Ball remaining = 0");
+
         }
 
     }
@@ -78,6 +81,8 @@ public class LevelController : MonoBehaviour
         GameManager.Instance.Score = 0;
 
         delay = new WaitForSeconds(spawnDelay);
+
+        StartCoroutine(SpawnBall(new WaitForSeconds(0)));
 
         InitializeDictionaries();
 
@@ -97,7 +102,7 @@ public class LevelController : MonoBehaviour
         ballNumbers = new Dictionary<int, int>()
         {
             { 1, 15 }, { 2, 10 }, { 3, 15 }, { 4, 10 }, { 5, 15 },
-            { 6, 10 }, { 7, 15 }, { 8, 10 }, { 9, 15 }, { 10, 10 }
+            { 6, 10 }, { 7, 3 /* 15 todo uncomment */ }, { 8, 10 }, { 9, 15 }, { 10, 10 }
         };
 
         basketballHoopPositions = new Dictionary<int, float>()
@@ -131,7 +136,7 @@ public class LevelController : MonoBehaviour
             Ball ball = GetBall();
             ballController.SetBallProperties(ball);
 
-            ballCreateListener?.Invoke(ballRb);
+            BallCreateListener?.Invoke(ballRb);
         }
     }
 
