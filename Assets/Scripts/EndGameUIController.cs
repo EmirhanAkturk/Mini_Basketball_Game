@@ -9,11 +9,13 @@ public class EndGameUIController : MonoBehaviour
 {
     public delegate void EndGameAction();
 
-    //[SerializeField]
-    //GameObject endGamePanel;
+    [SerializeField]
+    GameObject endGamePanel;
 
     [SerializeField]
     TMP_Text scoreText;
+
+    private WaitForSeconds showPanelDelay;
 
     private void OnEnable()
     {
@@ -30,9 +32,12 @@ public class EndGameUIController : MonoBehaviour
 
     private void OnEndGameListener()
     {
-        Debug.Log("EVENT SENDEDD!!");
-        gameObject.SetActive(true);
-        scoreText.text = GameManager.Instance.Score.ToString();
+        StartCoroutine(ShowEndGamePanel());
+    }
+
+    private void Start()
+    {
+        showPanelDelay = new WaitForSeconds(3);
     }
 
     public void ContinueButton()
@@ -44,6 +49,16 @@ public class EndGameUIController : MonoBehaviour
 
         //Reload the level to create it according to the new level number
         LoadScene();
+    }
+
+    private IEnumerator ShowEndGamePanel()
+    {
+        yield return showPanelDelay;
+
+        scoreText.text = GameManager.Instance.Score.ToString();
+
+        endGamePanel.SetActive(true);
+
     }
 
     private void LoadScene()

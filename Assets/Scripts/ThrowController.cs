@@ -21,7 +21,9 @@ public class ThrowController : MonoBehaviour
     [SerializeField]
     Rigidbody ballRb;
 
+    //It adds to the ejection force arising from the swiping.
     private Dictionary<int, int> defaultForces;
+    
     //touch start posisiton, end position and swipe direction
     private Vector2 startTouchPosition, endTouchPosition, swipeDirection; 
 
@@ -61,6 +63,7 @@ public class ThrowController : MonoBehaviour
 
     private void InitializeDictionary()
     {
+        //It adds to the ejection force arising from the swiping.
         defaultForces = new Dictionary<int, int>()
         {
             { 1, 10 }, { 2, 10 }, { 3, 75 }, { 4, 75  }, { 5, 125 },

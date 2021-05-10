@@ -42,13 +42,16 @@ public class GameplayUIController : MonoBehaviour
         ballsRemainingValueText.text = ballsRemaining.ToString();
 
         if (ballsRemaining == 0)
+        {
+            Debug.Log("Ball remaining = 0");
             GameManager.Instance.Score = score;
+        }
     }
 
     private void Start()
     {
         ballsRemaining = LevelController.Instance.BallsRemaining;
-        scoreValueText.text = score.ToString();
         ballsRemainingValueText.text = ballsRemaining.ToString();
+        scoreValueText.text = score.ToString();
     }
 }

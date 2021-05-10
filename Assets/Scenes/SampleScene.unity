@@ -1173,6 +1173,66 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 100.001144, y: 10, z: 44.683464}
   m_Center: {x: 0, y: 0, z: 22.723995}
+--- !u!1 &382858223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 382858224}
+  - component: {fileID: 382858226}
+  - component: {fileID: 382858225}
+  m_Layer: 0
+  m_Name: UIControllers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &382858224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382858223}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2146566625}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &382858225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382858223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f08e1463403602409fe03d8782b7e7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreValueText: {fileID: 1501612877}
+  ballsRemainingValueText: {fileID: 734227223}
+--- !u!114 &382858226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382858223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f74c6f4833ac9cb45853e4d03ceea25d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endGamePanel: {fileID: 515949847}
+  scoreText: {fileID: 221369211}
 --- !u!1 &410144636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1505,7 +1565,6 @@ GameObject:
   - component: {fileID: 515949848}
   - component: {fileID: 515949850}
   - component: {fileID: 515949849}
-  - component: {fileID: 515949851}
   m_Layer: 5
   m_Name: End Game Panel
   m_TagString: Untagged
@@ -1571,19 +1630,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515949847}
   m_CullTransparentMesh: 0
---- !u!114 &515949851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 515949847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f74c6f4833ac9cb45853e4d03ceea25d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreText: {fileID: 221369211}
 --- !u!1 &635599339
 GameObject:
   m_ObjectHideFlags: 0
@@ -2338,7 +2384,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 783270278}
-  - component: {fileID: 783270279}
   m_Layer: 5
   m_Name: Gameplay Panel
   m_TagString: Untagged
@@ -2367,20 +2412,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &783270279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 783270277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f08e1463403602409fe03d8782b7e7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreValueText: {fileID: 1501612877}
-  ballsRemainingValueText: {fileID: 734227223}
 --- !u!1 &784644667
 GameObject:
   m_ObjectHideFlags: 0
@@ -3315,7 +3346,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519698074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1621346135}
@@ -3332,7 +3363,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 103.835464, y: 20, z: 84.60478}
+  m_Size: {x: 103.835464, y: 5, z: 84.60478}
   m_Center: {x: 9.254613, y: 0, z: -16.510817}
 --- !u!114 &1519698077
 MonoBehaviour:
@@ -3476,6 +3507,7 @@ MonoBehaviour:
   ballPrefab: {fileID: 5771543930949794086, guid: c867ad7c142a0364a8b8bc1baa9acd28,
     type: 3}
   basketballHoop: {fileID: 1514806412475843447}
+  spanwnPosition: {x: 0, y: 3, z: 0}
   defaultBall: {fileID: 11400000, guid: 5a41ecdee80cf2d49953e877afd0e75f, type: 2}
   specialBall1: {fileID: 11400000, guid: 8710450ecefce3b4f932beea5dfd1455, type: 2}
   specialBall2: {fileID: 11400000, guid: acc7a2a4288b5804db4b1b59597d6521, type: 2}
@@ -3673,7 +3705,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 515949851}
+      - m_Target: {fileID: 382858226}
         m_MethodName: ContinueButton
         m_Mode: 1
         m_Arguments:
@@ -4346,6 +4378,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1054191299}
+  - {fileID: 382858224}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

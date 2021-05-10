@@ -18,6 +18,9 @@ public class LevelController : MonoBehaviour
     [SerializeField]
     GameObject basketballHoop;
 
+    [SerializeField]
+    Vector3 spanwnPosition;
+
     [Header("Scriptable Objects")]
     [SerializeField]
     Ball defaultBall;
@@ -44,6 +47,10 @@ public class LevelController : MonoBehaviour
             Destroy(gameObject);
         else
             Instance = this;
+
+        InitializeDictionaries();
+
+        SetLevelStatus();
     }
 
     private void OnEnable()
@@ -70,9 +77,7 @@ public class LevelController : MonoBehaviour
             EndGameListener?.Invoke(); // not working !!
             GameManager.Instance.IsPlaying = false;
             Debug.Log("Ball remaining = 0");
-
         }
-
     }
 
     private void Start()
@@ -84,17 +89,9 @@ public class LevelController : MonoBehaviour
 
         StartCoroutine(SpawnBall(new WaitForSeconds(0)));
 
-        InitializeDictionaries();
 
         //levelNumber = PlayerPrefs.GetInt("LevelNumber");
-        levelNumber = GameManager.Instance.LevelNumber;
 
-        Debug.Log(levelNumber);
-
-        ballsRemaining = ballNumbers[levelNumber];
-        float zPosition = basketballHoopPositions[levelNumber];
-
-        SetHoopPosition(zPosition);
     }
 
     private void InitializeDictionaries()
@@ -112,6 +109,19 @@ public class LevelController : MonoBehaviour
         };
     }
 
+    private void SetLevelStatus()
+    {
+        levelNumber = 7/*GameManager.Instance.LevelNumber*/;
+
+        Debug.Log(levelNumber);
+
+        ballsRemaining = ballNumbers[levelNumber];
+
+        float zPosition = basketballHoopPositions[levelNumber];
+
+        SetHoopPosition(zPosition);
+    }
+
     private void SetHoopPosition(float zPos)
     {
         Vector3 currentPos = basketballHoop.transform.position;
@@ -127,7 +137,7 @@ public class LevelController : MonoBehaviour
             GameManager.Instance.IsThrowingBallExist = true;
 
             // todo get from the ball pool
-            GameObject newBall = Instantiate(ballPrefab, ballPrefab.transform.position, ballPrefab.transform.rotation);
+            GameObject newBall = Instantiate(ballPrefab, spanwnPosition, ballPrefab.transform.rotation);
 
             Rigidbody ballRb = newBall.GetComponent<Rigidbody>();
 
