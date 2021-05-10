@@ -65,9 +65,6 @@ public class BallPooling : MonoBehaviour
             newBall.SetActive(true);
             newBall.transform.parent = ballsPoolParent;
 
-            //balls.Add(newBall);
-
-            //return newBall;
             balls.Insert(0, newBall);
         }
    
@@ -78,12 +75,12 @@ public class BallPooling : MonoBehaviour
         balls.Add(usingBall);
 
         usingBall.transform.position = spawnPosition;
-        usingBall.transform.rotation = Quaternion.identity;
+        usingBall.transform.rotation = ballPrefab.transform.rotation;
 
         IPooledBall pooledBall = usingBall.GetComponent<IPooledBall>();
 
         if(pooledBall != null)
-            pooledBall.OnBallSpawn(spawnPosition, ballPrefab.transform.rotation);
+            pooledBall.OnBallSpawn();
 
         return usingBall;
     }

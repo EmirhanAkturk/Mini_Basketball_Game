@@ -147,9 +147,6 @@ public class ThrowController : MonoBehaviour
             ballRb.isKinematic = false;
             ballRb.AddForce(forceX, forceY, forceZ);
 
-            // Hide ball in 4.5 second
-            //StartCoroutine( HideBall(ballRb.gameObject, new WaitForSeconds(hideDelayTime)) );
-
             BallController ballController = ballRb.gameObject.GetComponent<BallController>();
 
             ballController.AddBackToPool(delayTime);

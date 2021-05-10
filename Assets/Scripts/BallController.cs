@@ -15,13 +15,14 @@ public class BallController : MonoBehaviour, IPooledBall
     public bool IsThrowing{ get => isThrowing; set => isThrowing = value; }
 
     // Start is called before the first frame update
-    public void OnBallSpawn(Vector3 position, Quaternion rotation)
+    public void OnBallSpawn()
     {
-        //transform.position = position;
-        //transform.rotation = rotation;
-
         rb = GetComponent<Rigidbody>();
+
+        //To prevent rotation while assigning velocity
+        rb.freezeRotation = true;
         rb.velocity = Vector3.zero;
+        rb.freezeRotation = false;
 
         isThrowing = false;
         
@@ -54,18 +55,11 @@ public class BallController : MonoBehaviour, IPooledBall
             rb.isKinematic = true;
     }
 
-
     public IEnumerator HideGameObject(WaitForSeconds hideDelay)
     {
         yield return hideDelay;
 
-        //rb.velocity = Vector3.zero;
-
-        //gameObject.transform.position = startPosition;
-        //gameObject.transform.rotation = startRotation;
-
         gameObject.SetActive(false);
-
     }
 
 }
