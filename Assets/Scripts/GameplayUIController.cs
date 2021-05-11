@@ -18,11 +18,19 @@ public class GameplayUIController : MonoBehaviour
     [SerializeField]
     TMP_Text ballsRemainingValueText;
 
+    [Header("Camera Shake ")]
+    [SerializeField]
+    float shakeTime;
+
+    [SerializeField]
+    private float shakeForce;
+
     private int ballsRemaining;
 
     public WaitForSeconds HidePanelDelay { get; private set; }
 
     private int scorePerBasket;
+
 
     private void OnEnable()
     {
@@ -43,6 +51,7 @@ public class GameplayUIController : MonoBehaviour
 
         //update text
         scoreValueText.text = GameManager.Instance.Score.ToString();
+
     }
 
     private void OnUpdateUIListener()

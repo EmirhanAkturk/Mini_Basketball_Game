@@ -140,8 +140,6 @@ public class ThrowController : MonoBehaviour
         forceY = defaultForce + Mathf.Clamp(-swipeDirection.y * throwForceInY, minForceY, maxForceY);
         forceZ = defaultForce + throwForceInZ;
 
-        //Debug.Log(forceX + ", " + forceY + ", " + forceZ);
-
         if (ballRb != null)
         {
             GameManager.Instance.IsThrowingBallExist = false;

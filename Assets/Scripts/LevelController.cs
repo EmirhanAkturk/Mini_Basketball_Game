@@ -115,8 +115,6 @@ public class LevelController : MonoBehaviour
     {
         levelNumber = GetLevelNumber();
 
-        Debug.Log(levelNumber);
-
         ballsRemaining = ballNumbers[levelNumber];
 
         float zPosition = basketballHoopPositions[levelNumber];

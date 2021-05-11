@@ -1351,9 +1351,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f08e1463403602409fe03d8782b7e7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameplayPanel: {fileID: 783270277}
   scoreValueText: {fileID: 1501612877}
   ballsRemainingValueText: {fileID: 734227223}
-  gameplayPanel: {fileID: 783270277}
+  shakeTime: 0.5
+  shakeForce: 0.2
 --- !u!114 &382858226
 MonoBehaviour:
   m_ObjectHideFlags: 0
