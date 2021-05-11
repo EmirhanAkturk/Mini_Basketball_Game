@@ -24,4 +24,5 @@ public class CameraShake : MonoBehaviour
     {
         Camera.main.DOShakePosition(0.5f, 0.2f, fadeOut: true);
     }
+
 }

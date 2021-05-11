@@ -90,4 +90,10 @@ public class BallPooling : MonoBehaviour
         usingBall.transform.rotation = ballPrefab.transform.rotation;
         usingBall.tag = "Ball";
     }
+
+    public void HideAllBalls()
+    {
+        foreach (GameObject ball in balls)
+            ball.SetActive(false);
+    }
 }

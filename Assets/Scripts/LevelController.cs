@@ -85,6 +85,8 @@ public class LevelController : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.Score = 0;
+        BallPooling.Instance.HideAllBalls();
+
         delay = new WaitForSeconds(spawnDelay);
         StartCoroutine(SpawnBall(new WaitForSeconds(0)));
     }
