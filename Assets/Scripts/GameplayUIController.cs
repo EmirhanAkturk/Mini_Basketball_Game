@@ -6,8 +6,11 @@ using System;
 
 public class GameplayUIController : MonoBehaviour
 {
-    public delegate void RemainingBallAction();
+    public delegate void UpdateUIAction();
     public delegate void BasketAction();
+
+    [SerializeField]
+    GameObject gameplayPanel;
 
     [SerializeField]
     TMP_Text scoreValueText;
@@ -16,18 +19,20 @@ public class GameplayUIController : MonoBehaviour
     TMP_Text ballsRemainingValueText;
 
     private int ballsRemaining;
-    private int score;
+
+    public WaitForSeconds HidePanelDelay { get; private set; }
+
     private int scorePerBasket;
 
     private void OnEnable()
     {
-        BallController.BallFallListener += OnBallFallListener;
+        ThrowController.UpdateUIListener += OnUpdateUIListener;
         BasketCheckher.BasketListener += OnBasketListener;
     }
 
     private void OnDisable()
     {
-        BallController.BallFallListener -= OnBallFallListener;
+        ThrowController.UpdateUIListener -= OnUpdateUIListener;
         BasketCheckher.BasketListener -= OnBasketListener;
     }
 
@@ -40,20 +45,32 @@ public class GameplayUIController : MonoBehaviour
         scoreValueText.text = GameManager.Instance.Score.ToString();
     }
 
-    private void OnBallFallListener()
+    private void OnUpdateUIListener()
     {
         --ballsRemaining;
         ballsRemainingValueText.text = ballsRemaining.ToString();
+
+        if (ballsRemaining == 0)
+            StartCoroutine(HideGameplayPanel());
     }
 
     private void Start()
     {
+        HidePanelDelay = new WaitForSeconds(3);
+
         // Get level values
         scorePerBasket = LevelController.Instance.GetScorPerBasketValue();
         ballsRemaining = LevelController.Instance.BallsRemaining;
 
         // Initialize texts
         ballsRemainingValueText.text = ballsRemaining.ToString();
-        scoreValueText.text = score.ToString();
+        scoreValueText.text = GameManager.Instance.Score.ToString();
+    }
+
+    private IEnumerator HideGameplayPanel()
+    {
+        yield return HidePanelDelay;
+
+        gameplayPanel.SetActive(false);
     }
 }

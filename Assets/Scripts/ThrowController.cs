@@ -9,6 +9,8 @@ public class ThrowController : MonoBehaviour
     // Unity Events
     public delegate void ThrowContollerAction(Rigidbody ballRb);
     public static event LevelController.CreateBallAction BallThrowListener;
+    public static event GameplayUIController.UpdateUIAction UpdateUIListener; 
+
 
     float throwForceInX = 0.25f, throwForceInY = 0.5f, throwForceInZ = 150; 
 
@@ -30,7 +32,7 @@ public class ThrowController : MonoBehaviour
 
     private float swipeLimitDistance = 50;
     private float forceX, forceY, forceZ;
-    private float delayTime = 4;
+    private float delayTime = 4.5f;
 
     private void OnEnable()
     {
@@ -156,6 +158,7 @@ public class ThrowController : MonoBehaviour
             ballRb = null;
 
             BallThrowListener?.Invoke();
+            UpdateUIListener?.Invoke();
         }
     }
 

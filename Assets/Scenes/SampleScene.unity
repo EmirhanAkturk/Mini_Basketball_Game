@@ -1353,6 +1353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreValueText: {fileID: 1501612877}
   ballsRemainingValueText: {fileID: 734227223}
+  gameplayPanel: {fileID: 783270277}
 --- !u!114 &382858226
 MonoBehaviour:
   m_ObjectHideFlags: 0
