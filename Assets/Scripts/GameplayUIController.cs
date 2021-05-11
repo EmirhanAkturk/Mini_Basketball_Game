@@ -21,34 +21,29 @@ public class GameplayUIController : MonoBehaviour
 
     private void OnEnable()
     {
-        ThrowController.BallThrowListener1 += OnBallThrowListener;
+        BallController.BallFallListener += OnBallFallListener;
         BasketCheckher.BasketListener += OnBasketListener;
     }
 
     private void OnDisable()
     {
-        ThrowController.BallThrowListener1 -= OnBallThrowListener;
+        BallController.BallFallListener -= OnBallFallListener;
         BasketCheckher.BasketListener -= OnBasketListener;
     }
 
     private void OnBasketListener()
     {
         // increase score
-        score += scorePerBasket;
+        GameManager.Instance.Score += scorePerBasket;
 
         //update text
-        scoreValueText.text = score.ToString();
+        scoreValueText.text = GameManager.Instance.Score.ToString();
     }
 
-    private void OnBallThrowListener()
+    private void OnBallFallListener()
     {
         --ballsRemaining;
         ballsRemainingValueText.text = ballsRemaining.ToString();
-
-        if (ballsRemaining == 0)
-        {
-            GameManager.Instance.Score = score;
-        }
     }
 
     private void Start()

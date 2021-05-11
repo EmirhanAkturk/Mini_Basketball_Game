@@ -6,13 +6,29 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class BallController : MonoBehaviour, IPooledBall
 {
+    public static event GameplayUIController.RemainingBallAction BallFallListener; // todo move ball controller
+
     private WaitForSeconds enableIsKinematicDelay;
     private Rigidbody rb;
 
     private float delayTime = 1.3f;
     private bool isThrowing;
+    private bool isFall;
 
-    public bool IsThrowing{ get => isThrowing; set => isThrowing = value; }
+    public bool IsThrowing { get => isThrowing; set => isThrowing = value; }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(isThrowing && !isFall)
+        {
+            if (collision.gameObject.CompareTag("Plane") && isThrowing)
+            {
+                BallFallListener?.Invoke();
+                Debug.Log("Ball falled down");
+                isFall = true;
+            }
+        }
+    }
 
     // Start is called before the first frame update
     public void OnBallSpawn()
@@ -24,14 +40,15 @@ public class BallController : MonoBehaviour, IPooledBall
         rb.angularVelocity = Vector3.zero;
 
         isThrowing = false;
-        
+        isFall = false;
+
         enableIsKinematicDelay = new WaitForSeconds(delayTime);
         StartCoroutine(EnableIsKinematic());
     }
 
     public void SetBallProperties(Ball ball)
     {
-        if(rb == null)
+        if (rb == null)
             rb = GetComponent<Rigidbody>();
 
         rb.mass = ball.GetMass();
@@ -57,6 +74,12 @@ public class BallController : MonoBehaviour, IPooledBall
     public IEnumerator HideGameObject(WaitForSeconds hideDelay)
     {
         yield return hideDelay;
+
+        if (!isFall) 
+        {
+            isFall = true;
+            BallFallListener?.Invoke();
+        }
 
         gameObject.SetActive(false);
     }

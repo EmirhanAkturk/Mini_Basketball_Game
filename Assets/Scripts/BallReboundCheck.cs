@@ -10,7 +10,8 @@ public class BallReboundCheck : MonoBehaviour
 
         if (ballZPos > transform.position.z)
         {
-            other.gameObject.SetActive(false);
+            BallController ballController = other.gameObject.GetComponent<BallController>();
+            ballController.AddBackToPool(0);
         }
     }
 }

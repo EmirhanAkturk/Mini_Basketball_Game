@@ -58,12 +58,12 @@ public class LevelController : MonoBehaviour
 
     private void OnEnable()
     {
-        ThrowController.BallThrowListener1 += OnBallThrowListener;
+        ThrowController.BallThrowListener += OnBallThrowListener;
     }
 
     private void OnDisable()
     {
-        ThrowController.BallThrowListener1 -= OnBallThrowListener;
+        ThrowController.BallThrowListener -= OnBallThrowListener;
     }
 
     private void OnBallThrowListener()
@@ -84,6 +84,7 @@ public class LevelController : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.Score = 0;
         delay = new WaitForSeconds(spawnDelay);
         StartCoroutine(SpawnBall(new WaitForSeconds(0)));
     }
@@ -139,8 +140,6 @@ public class LevelController : MonoBehaviour
 
             // todo get from the ball pool
             GameObject newBall = BallPooling.Instance.GetNewBall();
-
-                /*Instantiate(ballPrefab, spanwnPosition, ballPrefab.transform.rotation);*/
 
             Rigidbody ballRb = newBall.GetComponent<Rigidbody>();
 

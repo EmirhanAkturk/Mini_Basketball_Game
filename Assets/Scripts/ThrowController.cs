@@ -8,8 +8,7 @@ public class ThrowController : MonoBehaviour
 {
     // Unity Events
     public delegate void ThrowContollerAction(Rigidbody ballRb);
-    public static event LevelController.CreateBallAction BallThrowListener1;
-    public static event GameplayUIController.RemainingBallAction BallThrowListener2;
+    public static event LevelController.CreateBallAction BallThrowListener;
 
     float throwForceInX = 0.25f, throwForceInY = 0.5f, throwForceInZ = 150; 
 
@@ -81,9 +80,10 @@ public class ThrowController : MonoBehaviour
         {
             if (ballRb != null)
             {
-                ballRb.isKinematic = true;
                 BallController controller = ballRb.gameObject.GetComponent<BallController>();
                 controller.IsThrowing = true;
+
+                ballRb.isKinematic = true;
             }
             // Get touch start time and position information.
             startTouchPosition = Input.mousePosition;
@@ -149,24 +149,14 @@ public class ThrowController : MonoBehaviour
             ballRb.AddForce(forceX, forceY, forceZ);
             ballRb.AddTorque(Vector3.right * forceY);
 
-
             BallController ballController = ballRb.gameObject.GetComponent<BallController>();
 
             ballController.AddBackToPool(delayTime);
 
-
             ballRb = null;
 
-            BallThrowListener1?.Invoke();
-            BallThrowListener2?.Invoke();
+            BallThrowListener?.Invoke();
         }
-    }
-
-    public IEnumerator HideBall(GameObject ball, WaitForSeconds hideDelay)
-    {
-        yield return hideDelay;
-
-        ball.SetActive(false);
     }
 
     private float GetProportionSwipeDistance(bool isVerticle, float distance)

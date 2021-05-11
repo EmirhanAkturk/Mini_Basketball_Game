@@ -20,7 +20,7 @@ public class BallPooling : MonoBehaviour
 
     private void Awake()
     {
-        if (BallPooling.Instance != null && BallPooling.Instance != this)
+        if (Instance != null && Instance != this)
             Destroy(gameObject);
         else
             Instance = this;
